@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver-db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Jhosep26_DockerPass!
+      - MSSQL_PID=Developer
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./init.sql:/init.sql
+
+  app:
+    build: .
+    container_name: node-web-app
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_USER=sa
+      - DB_PASSWORD=Jhosep26_DockerPass!
+      - DB_SERVER=sqlserver
+      - DB_NAME=TodoDB
+    depends_on:
+      - sqlserver
+      

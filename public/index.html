@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas - Docker Ready</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f9; }
+        .container { max-width: 500px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin: 0 auto; }
+        input[type="text"] { width: 70%; padding: 10px; margin-top: 5px; }
+        button { padding: 10px 15px; margin-top: 5px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        ul { list-style: none; padding: 0; }
+        li { margin: 10px 0; padding: 10px; background: #eee; border-radius: 4px; display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Lista de Tareas</h2>
+        <div>
+            <input type="text" id="titulo" placeholder="Nueva tarea...">
+            <button onclick="agregarTarea()">Agregar</button>
+        </div>
+        <ul id="lista"></ul>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
