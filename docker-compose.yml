@@ -6,23 +6,31 @@ services:
     container_name: sqlserver-db
     environment:
       - ACCEPT_EULA=Y
-      - MSSQL_SA_PASSWORD=Jhosep26_DockerPass!
+      - MSSQL_SA_PASSWORD=DockerMssqlPass2026
       - MSSQL_PID=Developer
     ports:
       - "1433:1433"
     volumes:
       - ./init.sql:/init.sql
+    # Comando para forzar la inicialización automática del script SQL
+    command: >
+      bash -c "
+      /opt/mssql/bin/sqlservr &
+      sleep 15;
+      /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'DockerMssqlPass2026' -i /init.sql -C;
+      wait
+      "
 
   app:
     build: .
     container_name: node-web-app
+    restart: always
     ports:
       - "3000:3000"
     environment:
       - DB_USER=sa
-      - DB_PASSWORD=Jhosep26_DockerPass!
+      - DB_PASSWORD=DockerMssqlPass2026
       - DB_SERVER=sqlserver
       - DB_NAME=TodoDB
     depends_on:
       - sqlserver
-      
